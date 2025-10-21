@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import categoryRoutes from "./routes/category.routes.js";
 import authRoutes from "./routes/auth.routes.js";
+import productRoutes from "./routes/product.routes.js";
+
 
 dotenv.config();
 
@@ -21,6 +23,7 @@ app.use(morgan("dev"));
 
 app.use("/categories", categoryRoutes);
 app.use("/auth", authRoutes);
+app.use("/products", productRoutes);
 
 //Sağlık kontrolü
 app.get("/health", (req,res)=>{
