@@ -117,7 +117,28 @@ router.patch("/:id", authRequired, adminOnly, async (req, res) => {
     // console.error("PATCH /categories/:id error:", err);
     // return res.status(500).json({ error: "Internal Server Error" });
     console.error("PATCH /categories/:id gerçek hata:", err);
-  return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * DELETE /categories/:id (admin)
+ * Not: İleride "bu kategoriye bağlı ürün var mı?" kontrolü ekleyebiliriz.
+ */
+
+router.delete("/:id", authRequired, adminOnly, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const doc = await Category.findByIdAndDelete(id);
+    if (!doc) return res.status(404).json({ error: "Kategori bulunamadı" });
+
+    //Silme Başarılı -> İçerik yok
+    
+    return res.status(204).send();
+  } catch (err) {
+    console.error("DELETE /categories/:id error:", err);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
