@@ -1,0 +1,133 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.back {
+  text-decoration: none;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+.heading {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+/* Kapak */
+.coverWrap {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 10px 0 14px;
+  aspect-ratio: 16 / 9;
+  background: #111;
+}
+
+.cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.coverOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.55));
+}
+
+.coverTitle {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  right: 12px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.125rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Hata & boş */
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.empty {
+  background: #f3f4f6;
+  color: #111827;
+  border: 1px dashed #d1d5db;
+  padding: 14px 12px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Grid — first-mobile: 2 sütun */
+.grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+  .heading {
+    font-size: 1.6rem;
+  }
+  .grid {
+    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .container {
+    padding: 24px;
+  }
+  .heading {
+    font-size: 1.8rem;
+  }
+  .grid {
+    gap: 16px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Yükleme iskeleti */
+.skeleton {
+  height: 0;
+  padding-bottom: calc(100% * 9 / 16);
+  border-radius: 16px;
+  background: linear-gradient(90deg, #ececec 25%, #f5f5f5 37%, #ececec 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.25s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
