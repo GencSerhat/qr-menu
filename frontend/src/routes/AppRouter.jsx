@@ -2,12 +2,10 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 // Sayfaları lazy yükleyelim (henüz oluşturmadık; sırayla yapacağız)
-const HomePage = lazy(() => import("../views/HomePage.jsx"));
-const CategoryPage = lazy(() => import("../views/CategoryPage.jsx")); // Kategori grid (public)
-const AdminLoginPage = lazy(() => import("../views/AdminLoginPage.jsx")); // Ürün listesi (public)
-const AdminDashboardPage = lazy(() =>
-  import("../views/AdminDashboardPage.jsx")
-);
+const HomePage = lazy(() => import("../pages/Home/Home.jsx"));
+const CategoryPage = lazy(() => import("../pages/Category/Category.jsx"));
+const AdminLoginPage = lazy(() => import("../pages/admin/Login/Login.jsx"));
+const AdminDashboardPage = lazy(() => import("../pages/admin/Dashboard/Dashboard.jsx"));
 
 function Loader() {
   return <div style={{ padding: 16 }}>Yükleniyor...</div>;
