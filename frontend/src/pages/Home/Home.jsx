@@ -46,22 +46,19 @@ export default function Home() {
         <div className={styles.empty}>Henüz Kategori eklenmemiş.</div>
       ) : (
         <div className={styles.grid}>
-          {cats.map((c) => (
-            <CategoryCard
-              key={c.slug}
-              title={c.title}
-              slug={c.slug}
-              imageURL={
-                c.coverImageUrl || "https://picsum.photos/800/500?category"
-              }
-            />
-          ))}
+          {" "}
+        {cats.map((c) => {
+  const id = c._id || c.id || c.slug;
+const img = (c.coverImageUrl || "").trim() || "https://picsum.photos/800/500?category";
+   return (
+    <CategoryCard key={c._id || c.id || c.slug} title={c.title} slug={c.slug} imageUrl={img} />
+   );
+ })}
         </div>
       )}
     </main>
   );
 }
-
 
 // Notlar
 
