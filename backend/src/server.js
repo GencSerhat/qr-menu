@@ -16,9 +16,10 @@ const app= express();
 //Orjin ayarı : geliştirmede serbest bırakyoruz.
 
 // app.use(cors({origin:process.env.CLIENT_URL || "*"}));
+const allowed = process.env.CORS_ORIGIN?.split(',').map(s=>s.trim());
 app.use(cors({
-  origin: ['https://demo3.karyasoft.net'],
-  methods: ['GET','POST','PATCH','PUT','DELETE','OPTIONS']
+  origin: allowed || ['https://demo3.karyasoft.net'],
+  methods: ['GET','POST','PATCH','PUT','DELETE','OPTIONS'],
 }));
 app.use(helmet());
 app.use(express.json());
