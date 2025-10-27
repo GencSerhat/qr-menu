@@ -85,17 +85,36 @@ router.patch("/:id", authRequired, adminOnly, async (req, res) => {
     const { title, coverImageUrl, order, isActive } = req.body || {};
 
     const update = {};
+
     if (typeof title === "string") update.title = title.trim();
-    if (typeof coverImageUrl === "string")
-      update.coverImageUrl = coverImageUrl.trim();
-    if (order !== undefined) update.order = Number(order) || 0;
-    if (isActive !== undefined) update.isActive = Boolean(isActive);
+    if (typeof coverImageUrl === "string") update.coverImageUrl = coverImageUrl.trim();
+
+    if (order !== undefined) {
+      const n = Number(order);
+      if (!Number.isNaN(n)) update.order = n;
+    }
+
+    // 🔒 Güvenli isActive parse
+    if (isActive !== undefined) {
+      let parsed;
+      if (typeof isActive === "boolean") parsed = isActive;
+      else if (typeof isActive === "number") parsed = isActive === 1;
+      else if (typeof isActive === "string") {
+        const v = isActive.trim().toLowerCase();
+        if (["1", "true", "on", "yes"].includes(v)) parsed = true;
+        else if (["0", "false", "off", "no"].includes(v)) parsed = false;
+      }
+      if (typeof parsed === "boolean") update.isActive = parsed;
+      // değilse hiç dokunma → mevcut değer korunur
+    }
+
     const doc = await Category.findByIdAndUpdate(id, update, {
       new: true,
       runValidators: true,
     });
 
     if (!doc) return res.status(404).json({ error: "Kategori bulunamadı" });
+
     return res.json({
       data: {
         id: doc._id.toString(),
@@ -110,12 +129,8 @@ router.patch("/:id", authRequired, adminOnly, async (req, res) => {
     });
   } catch (err) {
     if (err?.code === 11000) {
-      return res
-        .status(409)
-        .json({ error: "Bu başlıkla bir kategori zaten var" });
+      return res.status(409).json({ error: "Bu başlıkla bir kategori zaten var" });
     }
-    // console.error("PATCH /categories/:id error:", err);
-    // return res.status(500).json({ error: "Internal Server Error" });
     console.error("PATCH /categories/:id gerçek hata:", err);
     return res.status(500).json({ error: err.message });
   }
