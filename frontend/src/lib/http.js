@@ -23,7 +23,9 @@ export function getAuthToken() {
   }
 }
 
-export const http = axios.create({ baseURL: BASE_URL, timeout: 15000 });
+const http = axios.create({
+  baseURL: import.meta.env.VITE_API_URL, // buradan okuyacak
+});
 
 http.interceptors.request.use((config) => {
   const token = getAuthToken();
