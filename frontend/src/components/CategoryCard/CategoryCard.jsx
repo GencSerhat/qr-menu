@@ -22,7 +22,7 @@ export default function CategoryCard ({title, slug, imageUrl}) {
 onError={(e) => { e.currentTarget.src = "https://picsum.photos/800/500?cat"; }}
        />
                 <div className={styles.overlay}/>
-                <h3 className={styles.title}>{title}</h3>
+                 <h3 className={styles.title}><span>{title}</span></h3>
                 
             </div>
         </Link>

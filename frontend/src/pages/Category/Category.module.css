@@ -1,8 +1,13 @@
-.container {
+/* .container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 16px;
   width: 100%;
+} */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 /* Üst başlık */
@@ -18,7 +23,9 @@
   font-weight: 600;
   color: #2563eb;
 }
-.back:hover { text-decoration: underline; }
+.back:hover {
+  text-decoration: underline;
+}
 
 .heading {
   font-size: 1.4rem;
@@ -28,30 +35,42 @@
 }
 
 /* === HERO / KAPAK: TÜM KATEGORİLERDE SABİT 16:9 === */
-.coverWrap {
+/* .coverWrap {
   position: relative;
   border-radius: 16px;
   overflow: hidden;
   margin: 10px 0 14px;
   width: 100%;
   height: 0;
-  padding-bottom: 56.25%; /* 16:9 */
+  padding-bottom: 56.25%; 
   background: #111;
+} */
+ .coverWrap{
+  position:relative; border-radius:22px; overflow:hidden; margin:12px 0 18px;
+  width:100%; height:0; padding-bottom:56.25%; background:#0b0f14; box-shadow:0 10px 28px rgba(0,0,0,.12);
 }
-.cover {
+/* .cover {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-}
-.coverOverlay {
+} */
+ .cover{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+
+/* .coverOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.55));
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.55));
+} */
+ .coverOverlay{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(140% 100% at 80% 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%),
+    linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.65) 100%);
 }
-.coverTitle {
+/* .coverTitle {
   position: absolute;
   bottom: 10px;
   left: 12px;
@@ -59,7 +78,13 @@
   color: #fff;
   font-weight: 800;
   font-size: 1.125rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+} */
+ .coverTitle{
+  position:absolute; left:16px; bottom:14px; color:#fff; font-weight:900; font-size:1.25rem; letter-spacing:.2px;
+  text-shadow:0 2px 6px rgba(0,0,0,.5);
+  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+  padding:8px 12px; border-radius:14px; backdrop-filter: blur(2px);
 }
 
 /* Hata & boş */
@@ -81,13 +106,19 @@
 }
 
 /* === ÜRÜN GRID: HER YERDE AYNI (mobil 2 / tablet 3 / desktop 4) === */
-.grid {
+/* .grid {
    display: grid;
   gap: 16px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   width: 100%;
+} */
+.grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
 }
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .container { padding: 20px; }
   .heading { font-size: 1.6rem; }
   .grid { grid-template-columns: repeat(3, minmax(0, 1fr));}
@@ -96,10 +127,23 @@
   .container { padding: 24px; }
   .heading { font-size: 1.8rem; }
   .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+} */
+
+@media (min-width: 768px) {
+  .grid {
+    gap: 18px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .grid {
+    gap: 22px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 /* Yükleme iskeleti */
-.skeleton {
+/* .skeleton {
   height: 0;
   padding-bottom: 56.25%;
   border-radius: 16px;
@@ -110,4 +154,21 @@
 @keyframes shimmer {
   0% { background-position: 100% 0; }
   100% { background-position: 0 0; }
+} */
+
+.skeleton {
+  height: 0;
+  padding-bottom: 56.25%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #eef2f7 25%, #f6f9fc 37%, #eef2f7 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.25s infinite;
+}
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
